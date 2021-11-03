@@ -60,6 +60,10 @@ export class Forever {
         return this._controller;
     }
 
+    public get intervals(): number {
+        return this._currentInterval;
+    }
+
     public is(mode: FOREVER_MODE_OPTION): boolean {
         return this._mode.option.mode === mode;
     }
@@ -90,9 +94,24 @@ export class Forever {
         return await Promise.resolve(this._shouldExecuteBase());
     }
 
-    public emitExecution(): void {
+    public reset(): void {
 
-        this._currentInterval++;
+        this._currentInterval = 0;
+    }
+
+    public emitExecution(times: number = 1): void {
+
+        this._currentInterval = this._currentInterval + times;
+    }
+
+    public emitAbort(): void {
+
+        this._controller.abort();
+    }
+
+    public emitResume(): void {
+
+        this._controller.resume();
     }
 
     private _shouldExecuteController(): boolean {
