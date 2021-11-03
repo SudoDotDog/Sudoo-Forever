@@ -8,3 +8,6 @@ export enum ForeverMode {
 
     ONCE = 'ONCE',
 }
+
+export type ForeverAbortFunction = () => void;
+export type ForeverResumeFunction = () => void;
