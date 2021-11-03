@@ -11,6 +11,7 @@ import { Forever } from '../../src';
 
 describe('Given (Forever) Scenario', (): void => {
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const chance: Chance.Chance = new Chance('integrate-forever-forever');
 
     it('should be able to execute once', (): void => {
