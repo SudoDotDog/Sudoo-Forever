@@ -30,6 +30,9 @@ export class ForeverController {
     public get shouldContinue(): boolean {
         return this._aborted === false;
     }
+    public get shouldStop(): boolean {
+        return this._aborted === true;
+    }
 
     public get abortFunctions(): ForeverAbortFunction[] {
         return Array.from(this._abortFunctions);

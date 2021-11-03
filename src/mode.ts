@@ -12,11 +12,15 @@ type ForeverModeOptions = {
 } | {
 
     readonly mode: FOREVER_MODE_OPTION.REPEAT;
-    readonly count: number;
+    readonly times: number;
 } | {
 
     readonly mode: FOREVER_MODE_OPTION.UNTIL;
     readonly shouldStop: () => boolean;
+} | {
+
+    readonly mode: FOREVER_MODE_OPTION.UNTIL_ASYNC;
+    readonly shouldStop: () => Promise<boolean>;
 } | {
 
     readonly mode: FOREVER_MODE_OPTION.INFINITE;
@@ -35,7 +39,7 @@ export class ForeverMode {
 
         return new ForeverMode({
             mode: FOREVER_MODE_OPTION.REPEAT,
-            count: times,
+            times,
         });
     }
 
