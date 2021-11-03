@@ -5,7 +5,8 @@
  */
 
 import { ForeverController } from "./controller";
-import { ForeverMode } from "./declare";
+import { FOREVER_MODE_OPTION } from "./declare";
+import { ForeverMode } from "./mode";
 
 export class Forever {
 
@@ -13,7 +14,30 @@ export class Forever {
         controller: ForeverController = ForeverController.create(),
     ): Forever {
 
-        return new Forever(ForeverMode.ONCE, controller);
+        return new Forever(ForeverMode.once(), controller);
+    }
+
+    public static repeat(
+        times: number,
+        controller: ForeverController = ForeverController.create(),
+    ): Forever {
+
+        return new Forever(ForeverMode.repeat(times), controller);
+    }
+
+    public static until(
+        shouldStop: () => boolean,
+        controller: ForeverController = ForeverController.create(),
+    ): Forever {
+
+        return new Forever(ForeverMode.until(shouldStop), controller);
+    }
+
+    public static infinite(
+        controller: ForeverController = ForeverController.create(),
+    ): Forever {
+
+        return new Forever(ForeverMode.infinite(), controller);
     }
 
     private readonly _mode: ForeverMode;
@@ -25,10 +49,14 @@ export class Forever {
         this._controller = controller;
     }
 
-    public get mode(): ForeverMode {
-        return this._mode;
+    public get mode(): FOREVER_MODE_OPTION {
+        return this._mode.option.mode;
     }
     public get controller(): ForeverController {
         return this._controller;
+    }
+
+    public is(mode: FOREVER_MODE_OPTION): boolean {
+        return this.mode === mode;
     }
 }

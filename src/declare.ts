@@ -4,9 +4,12 @@
  * @description Declare
  */
 
-export enum ForeverMode {
+export enum FOREVER_MODE_OPTION {
 
     ONCE = 'ONCE',
+    REPEAT = 'REPEAT',
+    UNTIL = 'UNTIL',
+    INFINITE = 'INFINITE',
 }
 
 export type ForeverAbortFunction = () => void;
