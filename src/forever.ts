@@ -26,11 +26,11 @@ export class Forever {
     }
 
     public static until(
-        shouldStop: () => boolean,
+        shouldContinue: () => boolean,
         controller: ForeverController = ForeverController.create(),
     ): Forever {
 
-        return new Forever(ForeverMode.until(shouldStop), controller);
+        return new Forever(ForeverMode.until(shouldContinue), controller);
     }
 
     public static infinite(
@@ -84,7 +84,7 @@ export class Forever {
         }
 
         if (this._mode.option.mode === FOREVER_MODE_OPTION.UNTIL_ASYNC) {
-            return await this._mode.option.shouldStop();
+            return await this._mode.option.shouldContinue();
         }
 
         return await Promise.resolve(this._shouldExecuteBase());
@@ -114,7 +114,7 @@ export class Forever {
         }
 
         if (this._mode.option.mode === FOREVER_MODE_OPTION.UNTIL) {
-            return this._mode.option.shouldStop() === false;
+            return this._mode.option.shouldContinue();
         }
 
         if (this._mode.option.mode === FOREVER_MODE_OPTION.INFINITE) {

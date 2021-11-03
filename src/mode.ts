@@ -16,11 +16,11 @@ type ForeverModeOptions = {
 } | {
 
     readonly mode: FOREVER_MODE_OPTION.UNTIL;
-    readonly shouldStop: () => boolean;
+    readonly shouldContinue: () => boolean;
 } | {
 
     readonly mode: FOREVER_MODE_OPTION.UNTIL_ASYNC;
-    readonly shouldStop: () => Promise<boolean>;
+    readonly shouldContinue: () => Promise<boolean>;
 } | {
 
     readonly mode: FOREVER_MODE_OPTION.INFINITE;
@@ -43,11 +43,11 @@ export class ForeverMode {
         });
     }
 
-    public static until(shouldStop: () => boolean): ForeverMode {
+    public static until(shouldContinue: () => boolean): ForeverMode {
 
         return new ForeverMode({
             mode: FOREVER_MODE_OPTION.UNTIL,
-            shouldStop,
+            shouldContinue,
         });
     }
 
